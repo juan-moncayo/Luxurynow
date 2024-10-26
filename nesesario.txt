@@ -1,0 +1,61 @@
+1. React (ya incluido en Next.js)
+2. Next.js (asumiendo que este es un proyecto Next.js)
+3. shadcn/ui (una librería de componentes personalizables)
+4. Lucide React (para los iconos)
+
+
+Para instalar estas librerías, sigue estos pasos:
+
+1. Primero, asegúrate de tener un proyecto Next.js configurado. Si no lo tienes, puedes crearlo con:
+
+
+```shellscript
+npx create-next-app@latest
+```
+
+2. Para instalar shadcn/ui, ejecuta el siguiente comando en la raíz de tu proyecto:
+
+
+```shellscript
+npx shadcn@latest init
+```
+
+Durante la instalación de shadcn/ui, se te harán varias preguntas. Basado en el código, estas son las opciones que deberías seleccionar:
+
+- Which style would you like to use? › Default
+- Which color would you like to use as base color? › Slate
+- Where is your global CSS file? › app/globals.css
+- Do you want to use CSS variables for colors? › yes
+- Where is your tailwind.config.js located? › tailwind.config.js
+- Configure the import alias for components: › @/components
+- Configure the import alias for utils: › @/lib/utils
+
+
+3. Después de la instalación inicial, necesitarás instalar los componentes individuales que estás utilizando. Puedes hacerlo con los siguientes comandos:
+
+
+```shellscript
+npx shadcn@latest add card
+npx shadcn@latest add tabs
+npx shadcn@latest add checkbox
+npx shadcn@latest add radio-group
+npx shadcn@latest add label
+npx shadcn@latest add textarea
+npx shadcn@latest add button
+```
+
+4. Para instalar Lucide React, ejecuta:
+
+
+```shellscript
+npm install lucide-react
+```
+
+5. Finalmente, asegúrate de que tienes las últimas versiones de react y react-dom:
+
+
+```shellscript
+npm install react@latest react-dom@latest
+```
+
+Después de seguir estos pasos, deberías tener todas las librerías necesarias instaladas y configuradas para usar el código proporcionado. Recuerda que también necesitarás configurar tu archivo `tailwind.config.js` y `globals.css` según las instrucciones de shadcn/ui si aún no lo has hecho.

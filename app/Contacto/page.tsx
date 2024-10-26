@@ -65,9 +65,7 @@ export default function Contactanos() {
           <Link href="/SobreNosotros" className="text-sm font-medium hover:text-[#406d70]">
             Sobre Nosotros
           </Link>
-          <Link href="/TouristFavour" className="text-sm font-medium hover:text-[#406d70]">
-            Tourist Favour
-          </Link>
+
           <Link href="/Contacto" className="text-sm font-medium hover:text-[#406d70]">
             Contacto
           </Link>
