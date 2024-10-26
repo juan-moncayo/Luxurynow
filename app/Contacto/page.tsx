@@ -36,6 +36,7 @@ export default function Contactanos() {
         throw new Error('Error al enviar el formulario')
       }
     } catch (error) {
+      console.error('Error submitting form:', error)
       alert('Hubo un error al enviar su mensaje. Por favor, inténtelo de nuevo.')
     }
   }
@@ -44,19 +45,18 @@ export default function Contactanos() {
     <div className="flex flex-col min-h-screen bg-[#fff8ea] text-[#203840]">
       <header className="px-4 lg:px-6 h-16 flex items-center border-b border-[#f2d8a8]">
         <div className="flex items-center space-x-2">
-        <Link href="/" className="flex items-center space-x-2">
-          <Image
-            src="/Logo.png"
-            alt="Logo"
-            width={40}
-            height={40}
-            className="rounded-full"
-          />
-
-        </Link>
+          <Link href="/" className="flex items-center space-x-2">
+            <Image
+              src="/Logo.png"
+              alt="Logo"
+              width={40}
+              height={40}
+              className="rounded-full"
+            />
+          </Link>
         </div>
         <nav className="ml-auto flex gap-4 sm:gap-6">
-        <Link href="/" className="text-sm font-medium hover:text-[#406d70]">
+          <Link href="/" className="text-sm font-medium hover:text-[#406d70]">
             Inicio
           </Link>
           <Link href="/Servicios" className="text-sm font-medium hover:text-[#406d70]">
@@ -65,7 +65,6 @@ export default function Contactanos() {
           <Link href="/SobreNosotros" className="text-sm font-medium hover:text-[#406d70]">
             Sobre Nosotros
           </Link>
-
           <Link href="/Contacto" className="text-sm font-medium hover:text-[#406d70]">
             Contacto
           </Link>
@@ -186,6 +185,8 @@ export default function Contactanos() {
           </div>
         </section>
       </main>
+
+      
 
       <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t border-[#f2d8a8] bg-[#203840] text-[#fff8ea]">
         <p className="text-xs">© 2024 Luxury Now Cancun. Todos los derechos reservados.</p>

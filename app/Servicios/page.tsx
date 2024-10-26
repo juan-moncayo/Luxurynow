@@ -22,9 +22,9 @@ export default function Servicios() {
   })
 
   const [activeTab, setActiveTab] = useState({
-    transportaciones: null,
-    actividades: null,
-    eventos: null
+    transportaciones: string | null;
+    actividades: string | null;
+    eventos: string | null;
   })
 
   const handleCheckboxChange = (activity: string) => {
@@ -84,7 +84,7 @@ export default function Servicios() {
             height={40}
             className="rounded-full"
           />
-          <span className="font-bold text-xl text-[#806343]">LNC</span>
+
         </Link>
         <nav className="ml-auto flex gap-4 sm:gap-6">
         <Link href="/" className="text-sm font-medium hover:text-[#406d70]">
