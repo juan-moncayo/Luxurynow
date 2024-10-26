@@ -52,7 +52,7 @@ export default function Contactanos() {
             height={40}
             className="rounded-full"
           />
-          <span className="font-bold text-xl text-[#806343]">LNC</span>
+
         </Link>
         </div>
         <nav className="ml-auto flex gap-4 sm:gap-6">
