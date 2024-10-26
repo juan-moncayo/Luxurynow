@@ -12,8 +12,22 @@ import { CarIcon, MapIcon, MoonIcon, HelpCircleIcon } from "lucide-react"
 import Image from 'next/image'
 import Link from 'next/link'
 
+interface FormData {
+  activities: string[]
+  timeAvailable: string
+  transport: string
+  specialEvent: string
+  additionalNotes: string
+}
+
+interface ActiveTab {
+  transportaciones: string | null
+  actividades: string | null
+  eventos: string | null
+}
+
 export default function Servicios() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     activities: [],
     timeAvailable: '',
     transport: '',
@@ -21,10 +35,10 @@ export default function Servicios() {
     additionalNotes: ''
   })
 
-  const [activeTab, setActiveTab] = useState({
-    transportaciones: string | null;
-    actividades: string | null;
-    eventos: string | null;
+  const [activeTab, setActiveTab] = useState<ActiveTab>({
+    transportaciones: null,
+    actividades: null,
+    eventos: null
   })
 
   const handleCheckboxChange = (activity: string) => {
@@ -69,7 +83,7 @@ export default function Servicios() {
     }
   }
 
-  const handleTabChange = (section: string, value: string) => {
+  const handleTabChange = (section: keyof ActiveTab, value: string) => {
     setActiveTab(prev => ({ ...prev, [section]: value }))
   }
 
@@ -84,10 +98,9 @@ export default function Servicios() {
             height={40}
             className="rounded-full"
           />
-
         </Link>
         <nav className="ml-auto flex gap-4 sm:gap-6">
-        <Link href="/" className="text-sm font-medium hover:text-[#406d70]">
+          <Link href="/" className="text-sm font-medium hover:text-[#406d70]">
             Inicio
           </Link>
           <Link href="/Servicios" className="text-sm font-medium hover:text-[#406d70]">
@@ -96,7 +109,6 @@ export default function Servicios() {
           <Link href="/SobreNosotros" className="text-sm font-medium hover:text-[#406d70]">
             Sobre Nosotros
           </Link>
-
           <Link href="/Contacto" className="text-sm font-medium hover:text-[#406d70]">
             Contacto
           </Link>
@@ -305,7 +317,7 @@ export default function Servicios() {
               </TabsList>
               <TabsContent value="nightlife">
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {['Cocobongo', 'Cirque du Soleil Joya at Vidanta', 'Variedad de Bares y Restaurantes'].map((venue) => (
+                  {['Cocobongo', 'Cirque  du Soleil Joya at Vidanta', 'Variedad de Bares y Restaurantes'].map((venue) => (
                     <Card key={venue} className="bg-white shadow-lg hover:shadow-xl transition-shadow">
                       <CardHeader>
                         <CardTitle>{venue}</CardTitle>
@@ -344,7 +356,11 @@ export default function Servicios() {
                     <div className="grid grid-cols-2 gap-4">
                       {['Cultura y arqueología', 'Aventuras al aire libre', 'Experiencias acuáticas', 'Relajación y bienestar', 'Gastronomía local', 'Vida nocturna'].map((activity) => (
                         <div className="flex items-center space-x-2" key={activity}>
-                          <Checkbox id={activity} onCheckedChange={() => handleCheckboxChange(activity)} />
+                          <Checkbox 
+                            id={activity} 
+                            checked={formData.activities.includes(activity)}
+                            onCheckedChange={() => handleCheckboxChange(activity)}
+                          />
                           <Label htmlFor={activity}>{activity}</Label>
                         </div>
                       ))}
@@ -353,7 +369,10 @@ export default function Servicios() {
                   
                   <div>
                     <h3 className="text-lg font-medium mb-2">2. Tiempo Disponible para Actividades:</h3>
-                    <RadioGroup onValueChange={(value) => handleInputChange({ target: { name: 'timeAvailable', value } } as React.ChangeEvent<HTMLInputElement>)}>
+                    <RadioGroup 
+                      value={formData.timeAvailable}
+                      onValueChange={(value) => handleInputChange({ target: { name: 'timeAvailable', value } } as React.ChangeEvent<HTMLInputElement>)}
+                    >
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem value="medio_dia" id="medio_dia" />
                         <Label htmlFor="medio_dia">Medio día</Label>
@@ -367,7 +386,10 @@ export default function Servicios() {
                   
                   <div>
                     <h3 className="text-lg font-medium mb-2">3. Preferencias de Transporte:</h3>
-                    <RadioGroup onValueChange={(value) => handleInputChange({ target: { name: 'transport', value } } as React.ChangeEvent<HTMLInputElement>)}>
+                    <RadioGroup 
+                      value={formData.transport}
+                      onValueChange={(value) => handleInputChange({ target: { name: 'transport', value } } as React.ChangeEvent<HTMLInputElement>)}
+                    >
                       {['SUV', 'Limusina', 'Van'].map((transport) => (
                         <div className="flex items-center space-x-2" key={transport}>
                           <RadioGroupItem value={transport.toLowerCase()} id={transport.toLowerCase()} />
@@ -379,7 +401,10 @@ export default function Servicios() {
                   
                   <div>
                     <h3 className="text-lg font-medium mb-2">4. ¿Tienes algún evento especial durante tu estancia?</h3>
-                    <RadioGroup onValueChange={(value) => handleInputChange({ target: { name: 'specialEvent', value } } as React.ChangeEvent<HTMLInputElement>)}>
+                    <RadioGroup 
+                      value={formData.specialEvent}
+                      onValueChange={(value) => handleInputChange({ target: { name: 'specialEvent', value } } as React.ChangeEvent<HTMLInputElement>)}
+                    >
                       {['Cumpleaños', 'Aniversario', 'Celebración corporativa'].map((event) => (
                         <div className="flex items-center space-x-2" key={event}>
                           <RadioGroupItem value={event.toLowerCase()} id={event.toLowerCase()} />
@@ -394,6 +419,7 @@ export default function Servicios() {
                     <Textarea 
                       placeholder="Escribe aquí tus notas o solicitudes especiales" 
                       name="additionalNotes"
+                      value={formData.additionalNotes}
                       onChange={handleInputChange}
                     />
                   </div>
